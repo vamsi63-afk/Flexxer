@@ -1638,6 +1638,6 @@ for (const [cmd, aliases] of Object.entries(config.aliases)) {
   console.error('❌ Discord token missing! Add DISCORD_TOKEN or TOKEN in Render env vars');
 } else {
   client.login(process.env.DISCORD_TOKEN || process.env.TOKEN)
-  .then(() => console.log("Bot login successful"))
-  .catch(err => console.error("Login Error:", err));
+    .then(() => console.log("Bot login successful"))
+    .catch(err => console.error("Login Error:", err));
       }
