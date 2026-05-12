@@ -1630,6 +1630,4 @@ for (const [cmd, aliases] of Object.entries(config.aliases)) {
         });
       }
 
-     const config = {
-  token: process.env.DISCORD_TOKEN || process.env.TOKEN,
-     }
+     
