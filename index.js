@@ -39,10 +39,6 @@ app.listen(config.express.port, '0.0.0.0', () => {
   }
 }
 
-client.login(process.env.DISCORD_TOKEN || process.env.TOKEN)
-  .then(() => console.log("Bot login successful"))
-  .catch(err => console.error("Login Error:", err));
-
 // Start Express server before bot
 startExpressServer();
 
