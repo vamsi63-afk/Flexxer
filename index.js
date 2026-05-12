@@ -1,7 +1,4 @@
-// ==========================================
-// FULL FIXED INDEX.JS - NO ERRORS (TOKEN UPDATED)
-// ==========================================
-
+// index.js
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const { Riffy } = require('riffy');
 const config = require('./config.js');
@@ -9,7 +6,6 @@ let prefix = config.prefix || "!";
 const express = require('express');
 require('dotenv').config();
 
-// FIX 1: Declaring ONLY ONCE
 let isLavalinkConnected = false; 
 
 function startExpressServer() {
@@ -44,7 +40,9 @@ Object.defineProperty = function(obj, prop, descriptor) {
     if (obj instanceof RiffyNode && (prop === 'host' || prop === 'port' || prop === 'password' || prop === 'secure' || prop === 'identifier')) {
         return originalDefineProperty(obj, prop, { value: descriptor.value, writable: true, enumerable: true, configurable: true });
     }
-    try { return originalDefineProperty(obj, prop, descriptor); } catch (e) {
+    try {
+        return originalDefineProperty(obj, prop, descriptor);
+    } catch (e) {
         return originalDefineProperty(obj, prop, { value: descriptor.value, writable: true, enumerable: true, configurable: true });
     }
 };
@@ -71,7 +69,6 @@ client.on('messageCreate', async (message) => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
-    // 1. PREFIX COMMAND
     if (command === 'prefix') {
         const newPrefix = args[0];
         if (!newPrefix) return message.reply(`❌ Current prefix: \`${prefix}\``);
@@ -79,7 +76,6 @@ client.on('messageCreate', async (message) => {
         return message.reply(`✅ Prefix changed to \`${newPrefix}\``);
     }
 
-    // 2. PLAY COMMAND
     if (command === 'play' || command === 'p') {
         const query = args.join(' ');
         if (!query) return message.reply('❌ Song name pampu!');
@@ -100,7 +96,6 @@ client.on('messageCreate', async (message) => {
         return message.reply(`🎵 Added: **${resolve.tracks[0].info.title}**`);
     }
 
-    // 3. VKICK
     if (command === 'vkick') {
         const member = message.mentions.members.first();
         if (!member || !member.voice.channel) return message.reply('❌ User VC lo ledhu!');
@@ -119,5 +114,5 @@ riffy.on('nodeError', (node, error) => {
     isLavalinkConnected = false;
 });
 
-// FIX 2: Using DISCORD_TOKEN for Render
+// Render lo nuvvu pettina DISCORD_TOKEN vaaduthunnam
 client.login(process.env.DISCORD_TOKEN || config.token);
